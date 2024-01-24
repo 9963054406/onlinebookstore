@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('cloning the git') {
             steps {
-                git credentialsId: 'user', url: 'git@github.com:9963054406/sprint-deployment.git', branch: 'master'
+                git credentialsId: 'user', url: 'git@github.com:9963054406/onlinebookstore.git', branch: 'master'
             }
         }
 
