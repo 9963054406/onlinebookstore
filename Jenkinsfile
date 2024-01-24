@@ -20,7 +20,8 @@ pipeline {
         stage('Dockerbuild') {
             steps {
                 script {
-                    sh "docker build -t booksimage:v1 ."
+                    // sh "docker build -t booksimage:v1 ."
+                    sh "docker run -d --name bookstore booksimage:v1
                 }
             }
         }
