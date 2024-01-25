@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bookstore
+  name: bookstore
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookstore
+  template:
+    metadata:
+      labels:
+        app: bookstore
+    spec:
+      containers:
+      - image: 408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1:v1
+        name: bookstore
