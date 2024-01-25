@@ -4,7 +4,7 @@ pipeline {
         maven 'maven-3.9.6'
     }
     stages {
-        stage('cloning the git') {
+     /*   stage('cloning the git') {
             steps {
                 git credentialsId: 'user', url: 'git@github.com:9963054406/onlinebookstore.git', branch: 'master'
             }
@@ -24,6 +24,15 @@ pipeline {
                     sh "docker run -d -p 80:80 booksimage:v1"
                 }
             }
-        }
+        } */
+        stage ('K8S Deploy') {
+          steps {
+            script {
+                withKubeConfig([credentialsId: 'k8s', serverUrl: '']) {
+                sh ('kubectl apply -f  deployment.yaml')
+                    }
+                }
+            }
+         }
     }
 }
