@@ -37,7 +37,8 @@ pipeline {
                 script {
                      docker.withRegistry( '', registryCredential ) {
                      dockerImage.push()
-                }    
+                    }    
+                }
             }
         }
       /*  stage ('K8S Deploy') {
