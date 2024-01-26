@@ -3,7 +3,7 @@ pipeline {
         //once you sign up for Docker hub, use that user_id here
         registry = "408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
-        registryCredential = 'awsid'
+        registryCredential = 'ECR'
         dockerImage = ''
     }
     agent any
