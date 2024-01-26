@@ -52,7 +52,7 @@ pipeline {
           steps {
             script {
                 withKubeConfig([credentialsId: 'k8s', serverUrl: '']) {
-                sh ('kubectl apply -f  deployment.yaml --validate=false')
+                sh ('kubectl apply -f  deployment.yaml')
                     }
                 }
             }
