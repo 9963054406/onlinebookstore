@@ -17,3 +17,18 @@ spec:
       containers:
       - image: 408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1:latest
         name: bookstore
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bookstore
+  name: bookstore
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: bookstore
+  type: NodePort
