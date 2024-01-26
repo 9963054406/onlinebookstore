@@ -1,10 +1,10 @@
 pipeline {
     environment {
-        //once you sign up for Docker hub, use that user_id here
-        registry = "408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1"
-        //- update your credentials ID after creating credentials for connecting to Docker Hub
-        registryCredential = '408579600952'
-        dockerImage = ''
+        AWS_ACCOUNT_ID="408579600952"
+        AWS_DEFAULT_REGION="us-east-1"
+        IMAGE_REPO_NAME="onlinebook1"
+        IMAGE_TAG="$BUILD_NUMBER"
+        REPOSITORY_URI = "408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1"
     }
     agent any
     tools {
@@ -32,15 +32,22 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image push') {
-            steps {   
+        stage('Logging into AWS ECR') {
+            steps {
                 script {
-                     docker.withRegistry( '', registryCredential ) {
-                     dockerImage.push()
-                    }    
+                    sh """aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"""
                 }
+                 
             }
         }
+        stage('Pushing to ECR') {
+            steps{  
+                script {
+                    sh """docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"""
+                     sh """docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"""
+         }
+        }
+      }
       /*  stage ('K8S Deploy') {
           steps {
             script {
