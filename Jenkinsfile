@@ -3,7 +3,7 @@ pipeline {
         AWS_ACCOUNT_ID="408579600952"
         AWS_DEFAULT_REGION="us-east-1"
         IMAGE_REPO_NAME="onlinebook1"
-        IMAGE_TAG="$BUILD_NUMBER"
+        IMAGE_TAG="latest"
         REPOSITORY_URI = "408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1"
     }
     agent any
@@ -27,7 +27,7 @@ pipeline {
         stage('Dockerbuild') {
             steps {
                 script {
-                     sh "docker build -t ${IMAGE_REPO_NAME}:$BUILD_NUMBER ."
+                     sh "docker build -t ${IMAGE_REPO_NAME}:$IMAGE_TAG ."
                     // sh "docker run -d -p 80:80 booksimage:$BUILD_NUMBER"
                 }
             }
