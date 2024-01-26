@@ -4,7 +4,7 @@ pipeline {
         maven 'maven-3.9.6'
     }
     stages {
-     /*   stage('cloning the git') {
+        stage('cloning the git') {
             steps {
                 git credentialsId: 'user', url: 'git@github.com:9963054406/onlinebookstore.git', branch: 'master'
             }
@@ -20,11 +20,11 @@ pipeline {
         stage('Dockerbuild') {
             steps {
                 script {
-                    // sh "docker build -t booksimage:v1 ."
-                    sh "docker run -d -p 80:80 booksimage:v1"
+                    // sh "docker build -t booksimage:$BUILD_NUMBER ."
+                    sh "docker run -d -p 80:80 booksimage:$BUILD_NUMBER"
                 }
             }
-        } */
+        } 
         stage ('K8S Deploy') {
           steps {
             script {
