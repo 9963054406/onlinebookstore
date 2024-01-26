@@ -15,7 +15,7 @@ spec:
         app: bookstore
     spec:
       containers:
-      - image: 408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1:$BUILD_NUMBER
+      - image: 408579600952.dkr.ecr.us-east-1.amazonaws.com/onlinebook1:$"BUILD_NUMBER"
         name: bookstore
 ---
 apiVersion: v1
