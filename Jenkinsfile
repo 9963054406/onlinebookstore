@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                      sh "docker build -t booksimage:$BUILD_NUMBER ."
-                    sh "docker run -d -p 80:80 booksimage:$BUILD_NUMBER"
+                    // sh "docker run -d -p 80:80 booksimage:$BUILD_NUMBER"
                 }
             }
         }
